@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="@drawable/activity_background"
     tools:context=".MainActivity">
 
 
@@ -18,7 +18,7 @@
         android:textColor="@color/grey"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plusButton" />
 
@@ -61,7 +61,7 @@
         android:id="@+id/numberOfClassesTextView"
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/textview_background_rounded_lightgrey"
         android:gravity="center_horizontal"
         android:hint="Number of classes"
