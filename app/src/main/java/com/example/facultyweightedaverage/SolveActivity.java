@@ -32,6 +32,7 @@ public class SolveActivity extends AppCompatActivity {
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
         parameters.height = numberOfClasses * 450;
         relativeLayout.setLayoutParams(parameters);
+        Button calculateButton = findViewById(R.id.calculateButton);
         int yCord = 140;
 
         View.OnClickListener buttonClick = view -> {
@@ -315,32 +316,6 @@ public class SolveActivity extends AppCompatActivity {
                 case 100:
                     substractWeight(39);
                     break;
-                case 101: //doneButton
-                    ArrayList<Double> gradesList = new ArrayList<>();
-                    ArrayList<Double> weightsList = new ArrayList<>();
-                    double weightSum = 0;
-                    double gradeWeightSum = 0;
-
-                    for(int i = 0 ; i < textViewArrayList.size();i=i+2){
-                        double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
-                        gradesList.add(aux);
-                    }
-
-                    for(int i = 1 ; i < textViewArrayList.size();i=i+2){
-                        double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
-                        weightsList.add(aux);
-                    }
-                    for(int i = 0 ; i < gradesList.size() ; i++){
-                        gradeWeightSum = gradeWeightSum + gradesList.get(i)*weightsList.get(i);
-                        weightSum = weightSum + weightsList.get(i);
-                    }
-                    double finalGrade = gradeWeightSum/weightSum;
-                    Bundle resultBundle = new Bundle();
-                    resultBundle.putDouble("RESULT", finalGrade);
-                    Intent intent = new Intent(this, ResultActivity.class);
-                    intent.putExtras(resultBundle);
-                    startActivity(intent);
-                    break;
                 default:
                     break;
             }
@@ -385,10 +360,32 @@ public class SolveActivity extends AppCompatActivity {
             yCord += 430;
         }
 
-        parameters.height = numberOfClasses * 450 + 150;
-        relativeLayout.setLayoutParams(parameters);
-        Button doneButton = createButton(101, buttonClick, 350, yCord, "Done", buttonBackground, new RelativeLayout.LayoutParams(250, 120));
-        relativeLayout.addView(doneButton);
+        calculateButton.setOnClickListener(v -> {
+            ArrayList<Double> gradesList = new ArrayList<>();
+            ArrayList<Double> weightsList = new ArrayList<>();
+            double weightSum = 0;
+            double gradeWeightSum = 0;
+
+            for(int i = 0 ; i < textViewArrayList.size();i=i+2){
+                double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
+                gradesList.add(aux);
+            }
+
+            for(int i = 1 ; i < textViewArrayList.size();i=i+2){
+                double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
+                weightsList.add(aux);
+            }
+            for(int i = 0 ; i < gradesList.size() ; i++){
+                gradeWeightSum = gradeWeightSum + gradesList.get(i)*weightsList.get(i);
+                weightSum = weightSum + weightsList.get(i);
+            }
+            double finalGrade = gradeWeightSum/weightSum;
+            Bundle resultBundle = new Bundle();
+            resultBundle.putDouble("RESULT", finalGrade);
+            Intent intent = new Intent(SolveActivity.this, ResultActivity.class);
+            intent.putExtras(resultBundle);
+            startActivity(intent);
+        });
 
     }
 
