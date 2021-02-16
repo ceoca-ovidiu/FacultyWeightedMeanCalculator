@@ -1,8 +1,8 @@
 package com.example.facultyweightedaverage;
 
 import android.annotation.SuppressLint;
+import android.icu.text.Edits;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +15,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SolveActivity extends AppCompatActivity {
 
-    private ArrayList<TextView> textViewArrayList = new ArrayList<>();
+    private final ArrayList<TextView> textViewArrayList = new ArrayList<>();
+    private final int buttonBackground = R.drawable.button_background_rounded_orange_bluestroke;
+    private final int textViewBackground = R.drawable.textview_background_rounded_lightgrey;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,7 +57,7 @@ public class SolveActivity extends AppCompatActivity {
                     addGrade(2);
                     break;
                 case 26:
-                   substractGrade(2);
+                    substractGrade(2);
                     break;
                 case 27:
                     addWeight(3);
@@ -82,7 +85,7 @@ public class SolveActivity extends AppCompatActivity {
                     addGrade(6);
                     break;
                 case 34:
-                   substractGrade(6);
+                    substractGrade(6);
                     break;
                 case 35:
                     addWeight(7);
@@ -93,7 +96,7 @@ public class SolveActivity extends AppCompatActivity {
 
 
                 case 37: // a 5-a materie
-                   addGrade(8);
+                    addGrade(8);
                     break;
                 case 38:
                     substractGrade(8);
@@ -102,7 +105,7 @@ public class SolveActivity extends AppCompatActivity {
                     addWeight(9);
                     break;
                 case 40:
-                   substractWeight(9);
+                    substractWeight(9);
                     break;
 
 
@@ -110,10 +113,10 @@ public class SolveActivity extends AppCompatActivity {
                     addGrade(10);
                     break;
                 case 42:
-                   substractGrade(10);
+                    substractGrade(10);
                     break;
                 case 43:
-                   addWeight(11);
+                    addWeight(11);
                     break;
                 case 44:
                     substractWeight(11);
@@ -135,21 +138,21 @@ public class SolveActivity extends AppCompatActivity {
 
 
                 case 49: // a 8-a materie
-                   addGrade(14);
+                    addGrade(14);
                     break;
                 case 50:
-                   substractGrade(14);
+                    substractGrade(14);
                     break;
                 case 51:
                     addWeight(15);
                     break;
                 case 52:
-                   substractWeight(15);
+                    substractWeight(15);
                     break;
 
 
                 case 53: // a 9-a materie
-                   addGrade(16);
+                    addGrade(16);
                     break;
                 case 54:
                     substractGrade(16);
@@ -163,7 +166,7 @@ public class SolveActivity extends AppCompatActivity {
 
 
                 case 57: // a 10-a materie
-                   addGrade(18);
+                    addGrade(18);
                     break;
                 case 58:
                     substractGrade(18);
@@ -186,7 +189,7 @@ public class SolveActivity extends AppCompatActivity {
                     addWeight(21);
                     break;
                 case 64:
-                   substractWeight(21);
+                    substractWeight(21);
                     break;
 
 
@@ -197,7 +200,7 @@ public class SolveActivity extends AppCompatActivity {
                     substractGrade(22);
                     break;
                 case 67:
-                   addWeight(23);
+                    addWeight(23);
                     break;
                 case 68:
                     substractWeight(23);
@@ -205,13 +208,13 @@ public class SolveActivity extends AppCompatActivity {
 
 
                 case 69: // a 13-a materie
-                   addGrade(24);
+                    addGrade(24);
                     break;
                 case 70:
                     substractGrade(24);
                     break;
                 case 71:
-                   addWeight(25);
+                    addWeight(25);
                     break;
                 case 72:
                     substractWeight(25);
@@ -222,7 +225,7 @@ public class SolveActivity extends AppCompatActivity {
                     addGrade(26);
                     break;
                 case 74:
-                   substractGrade(26);
+                    substractGrade(26);
                     break;
                 case 75:
                     addWeight(27);
@@ -270,15 +273,15 @@ public class SolveActivity extends AppCompatActivity {
                     addWeight(33);
                     break;
                 case 88:
-                   substractWeight(33);
+                    substractWeight(33);
                     break;
 
 
                 case 89: // a 18-a materie
-                   addGrade(34);
+                    addGrade(34);
                     break;
                 case 90:
-                   substractGrade(34);
+                    substractGrade(34);
                     break;
                 case 91:
                     addWeight(35);
@@ -298,7 +301,7 @@ public class SolveActivity extends AppCompatActivity {
                     addWeight(37);
                     break;
                 case 96:
-                   substractWeight(37);
+                    substractWeight(37);
                     break;
 
 
@@ -314,51 +317,36 @@ public class SolveActivity extends AppCompatActivity {
                 case 100:
                     substractWeight(39);
                     break;
+                case 101: //doneButton
+                    ArrayList<Integer> gradesList = new ArrayList<>();
+                    ArrayList<Integer> weightsList = new ArrayList<>();
+                    int weightSum = 0;
+                    int gradeWeightSum = 0;
+
+                    for(int i = 0 ; i < textViewArrayList.size();i=i+2){
+                        int aux = Integer.parseInt(textViewArrayList.get(i).getText().toString());
+                        gradesList.add(aux);
+                    }
+
+                    for(int i = 1 ; i < textViewArrayList.size();i=i+2){
+                        int aux = Integer.parseInt(textViewArrayList.get(i).getText().toString());
+                        weightsList.add(aux);
+                    }
+                    for(int i = 0 ; i < gradesList.size() ; i++){
+                        gradeWeightSum = gradeWeightSum + gradesList.get(i)*weightsList.get(i);
+                        weightSum = weightSum + weightsList.get(i);
+                    }
+                    break;
                 default:
                     break;
             }
         };
 
         for (int i = 0; i < numberOfClasses; i++) {
-            EditText nameEditText = new EditText(this);
-            TextView gradeTextView = new TextView(this);
-            TextView weightTextView = new TextView(this);
+            EditText nameEditText = createEditText(yCord + 15, "Materia " + (i + 1), textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            TextView gradeTextView = createTextView(480, yCord + 15, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
-            nameEditText.setHeight(120);
-            gradeTextView.setHeight(120);
-            weightTextView.setHeight(120);
-
-            nameEditText.setWidth(400);
-            gradeTextView.setWidth(150);
-            weightTextView.setWidth(150);
-
-            nameEditText.setX(60);
-            gradeTextView.setX(480);
-            weightTextView.setX(650);
-
-            nameEditText.setY(yCord + 15);
-            gradeTextView.setY(yCord + 15);
-            weightTextView.setY(yCord + 15);
-
-            nameEditText.setHint("Materia " + (i + 1));
-            gradeTextView.setText("5");
-            weightTextView.setText("1");
-
-            nameEditText.setTextSize(20);
-            gradeTextView.setTextSize(20);
-            weightTextView.setTextSize(20);
-
-            nameEditText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            gradeTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            weightTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-
-            nameEditText.setBackgroundResource(R.drawable.textview_background_rounded_lightgrey);
-            gradeTextView.setBackgroundResource(R.drawable.textview_background_rounded_lightgrey);
-            weightTextView.setBackgroundResource(R.drawable.textview_background_rounded_lightgrey);
-
-            nameEditText.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-            gradeTextView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-            weightTextView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            TextView weightTextView = createTextView(650, yCord + 15, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
             textViewArrayList.add(gradeTextView);
             textViewArrayList.add(weightTextView);
@@ -369,64 +357,19 @@ public class SolveActivity extends AppCompatActivity {
 
             yCord += 430;
         }
+
         yCord = 20;
         int buttonId = 21;
         for (int i = 0; i < numberOfClasses; i++) {
 
-            Button plusGradeButton = new Button(this);
-            Button minusGradeButton = new Button(this);
-            Button plusWeightButton = new Button(this);
-            Button minusWeightButton = new Button(this);
-
-            plusGradeButton.setId(buttonId);
+            Button plusGradeButton = createButton(buttonId, buttonClick, 480, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
             buttonId++;
-            minusGradeButton.setId(buttonId);
+            Button minusGradeButton = createButton(buttonId, buttonClick, 480, yCord + 270, "-", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
             buttonId++;
-            plusWeightButton.setId(buttonId);
+            Button plusWeightButton = createButton(buttonId, buttonClick, 650, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
             buttonId++;
-            minusWeightButton.setId(buttonId);
+            Button minusWeightButton = createButton(buttonId, buttonClick, 650, yCord + 270, "-", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
             buttonId++;
-
-
-            plusGradeButton.setOnClickListener(buttonClick);
-            minusGradeButton.setOnClickListener(buttonClick);
-            plusWeightButton.setOnClickListener(buttonClick);
-            minusWeightButton.setOnClickListener(buttonClick);
-
-            plusGradeButton.setX(480);
-            minusGradeButton.setX(480);
-            plusWeightButton.setX(650);
-            minusWeightButton.setX(650);
-
-            plusGradeButton.setY(yCord);
-            minusGradeButton.setY(yCord + 270);
-            plusWeightButton.setY(yCord);
-            minusWeightButton.setY(yCord + 270);
-
-            plusGradeButton.setText("+");
-            minusGradeButton.setText("-");
-            plusWeightButton.setText("+");
-            minusWeightButton.setText("-");
-
-            plusGradeButton.setTextSize(20);
-            minusGradeButton.setTextSize(20);
-            plusWeightButton.setTextSize(20);
-            minusWeightButton.setTextSize(20);
-
-            plusGradeButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            minusGradeButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            plusWeightButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            minusWeightButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-
-            plusGradeButton.setBackgroundResource(R.drawable.button_background_rounded_orange_bluestroke);
-            minusGradeButton.setBackgroundResource(R.drawable.button_background_rounded_orange_bluestroke);
-            plusWeightButton.setBackgroundResource(R.drawable.button_background_rounded_orange_bluestroke);
-            minusWeightButton.setBackgroundResource(R.drawable.button_background_rounded_orange_bluestroke);
-
-            plusGradeButton.setLayoutParams(new RelativeLayout.LayoutParams(150, 120));
-            minusGradeButton.setLayoutParams(new RelativeLayout.LayoutParams(150, 120));
-            plusWeightButton.setLayoutParams(new RelativeLayout.LayoutParams(150, 120));
-            minusWeightButton.setLayoutParams(new RelativeLayout.LayoutParams(150, 120));
 
             relativeLayout.addView(plusGradeButton);
             relativeLayout.addView(minusGradeButton);
@@ -435,30 +378,85 @@ public class SolveActivity extends AppCompatActivity {
 
             yCord += 430;
         }
+
+        parameters.height = numberOfClasses * 450 + 150;
+        relativeLayout.setLayoutParams(parameters);
+        Button doneButton = createButton(101, buttonClick, 350, yCord, "Done", buttonBackground, new RelativeLayout.LayoutParams(250, 120));
+        relativeLayout.addView(doneButton);
+
     }
 
-    private void addGrade (int indexTextView){
+    private void addGrade(int indexTextView) {
         if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 10)
             Toast.makeText(SolveActivity.this, "The maximum grade is 10", Toast.LENGTH_SHORT).show();
         else
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) + 1));
     }
 
-    private void substractGrade (int indexTextView){
-        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5)
+    private void substractGrade(int indexTextView) {
+        if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5)
             Toast.makeText(SolveActivity.this, "The minimum grade is 5", Toast.LENGTH_SHORT).show();
         else
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
     }
 
-    private void addWeight (int indexTextView){
+    private void addWeight(int indexTextView) {
         textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) + 1));
     }
 
-    private void substractWeight (int indexTextView){
-        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 1)
+    private void substractWeight(int indexTextView) {
+        if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 1)
             Toast.makeText(SolveActivity.this, "The minimum amount of points is 1", Toast.LENGTH_SHORT).show();
         else
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
+    }
+
+    private Button createButton(int id, View.OnClickListener buttonClick, float xCoord, float yCoord,
+                                String text, int background,
+                                RelativeLayout.LayoutParams layoutParams) {
+        Button button = new Button(this);
+        button.setId(id);
+        button.setOnClickListener(buttonClick);
+        button.setX(xCoord);
+        button.setY(yCoord);
+        button.setText(text);
+        button.setTextSize((float) 20);
+        button.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        button.setBackgroundResource(background);
+        button.setLayoutParams(layoutParams);
+
+        return button;
+    }
+
+    private TextView createTextView(float xCoord, float yCoord, String text, int background, RelativeLayout.LayoutParams params) {
+
+        TextView textView = new TextView(this);
+        textView.setHeight(120);
+        textView.setWidth(150);
+        textView.setX(xCoord);
+        textView.setY(yCoord);
+        textView.setText(text);
+        textView.setTextSize((float) 20);
+        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        textView.setBackgroundResource(background);
+        textView.setLayoutParams(params);
+
+        return textView;
+    }
+
+    private EditText createEditText(float yCoord, String hintText, int background, RelativeLayout.LayoutParams params) {
+
+        EditText editText = new EditText(this);
+        editText.setHeight(120);
+        editText.setWidth(400);
+        editText.setX((float) 60);
+        editText.setY(yCoord);
+        editText.setHint(hintText);
+        editText.setTextSize((float) 20);
+        editText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        editText.setBackgroundResource(background);
+        editText.setLayoutParams(params);
+
+        return editText;
     }
 }
