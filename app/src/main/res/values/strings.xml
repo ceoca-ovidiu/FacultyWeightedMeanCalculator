@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cool Grade</string>
+    <string name="number_of_classes">Number of classes</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="done">Done</string>
+    <string name="final_grade_result">FINAL GRADE</string>
 </resources>

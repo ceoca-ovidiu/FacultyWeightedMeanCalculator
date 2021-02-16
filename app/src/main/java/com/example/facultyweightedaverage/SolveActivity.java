@@ -2,7 +2,7 @@ package com.example.facultyweightedaverage;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.icu.text.Edits;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -16,13 +16,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class SolveActivity extends AppCompatActivity {
 
     private final ArrayList<TextView> textViewArrayList = new ArrayList<>();
-    private final int buttonBackground = R.drawable.button_background_rounded_orange_bluestroke;
-    private final int textViewBackground = R.drawable.textview_background_rounded_lightgrey;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,7 +27,7 @@ public class SolveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solve);
         Bundle bundle = getIntent().getExtras();
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.solveRelativeLayout);
+        RelativeLayout relativeLayout = findViewById(R.id.solveRelativeLayout);
         int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES");
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
         parameters.height = numberOfClasses * 450;
@@ -350,6 +347,7 @@ public class SolveActivity extends AppCompatActivity {
         };
 
         for (int i = 0; i < numberOfClasses; i++) {
+            int textViewBackground = R.drawable.textview_background_rounded_lightgrey;
             EditText nameEditText = createEditText(yCord + 15, "Materia " + (i + 1), textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
             TextView gradeTextView = createTextView(480, yCord + 15, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
@@ -367,6 +365,7 @@ public class SolveActivity extends AppCompatActivity {
 
         yCord = 20;
         int buttonId = 21;
+        int buttonBackground = R.drawable.button_background_rounded_orange_bluestroke;
         for (int i = 0; i < numberOfClasses; i++) {
 
             Button plusGradeButton = createButton(buttonId, buttonClick, 480, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
@@ -428,7 +427,7 @@ public class SolveActivity extends AppCompatActivity {
         button.setY(yCoord);
         button.setText(text);
         button.setTextSize((float) 20);
-        button.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        button.setPadding(10,10,10,10);
         button.setBackgroundResource(background);
         button.setLayoutParams(layoutParams);
 
@@ -444,7 +443,8 @@ public class SolveActivity extends AppCompatActivity {
         textView.setY(yCoord);
         textView.setText(text);
         textView.setTextSize((float) 20);
-        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setGravity(Gravity.CENTER);
         textView.setBackgroundResource(background);
         textView.setLayoutParams(params);
 
@@ -459,8 +459,10 @@ public class SolveActivity extends AppCompatActivity {
         editText.setX((float) 60);
         editText.setY(yCoord);
         editText.setHint(hintText);
+        editText.setHintTextColor(Color.parseColor("#000000"));
         editText.setTextSize((float) 20);
-        editText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        editText.setTextColor(Color.parseColor("#000000"));
+        editText.setPadding(50,10,10,10);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
 
