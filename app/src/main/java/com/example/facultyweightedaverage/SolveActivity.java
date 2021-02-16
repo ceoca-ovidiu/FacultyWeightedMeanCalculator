@@ -1,6 +1,7 @@
 package com.example.facultyweightedaverage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.icu.text.Edits;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -318,24 +319,30 @@ public class SolveActivity extends AppCompatActivity {
                     substractWeight(39);
                     break;
                 case 101: //doneButton
-                    ArrayList<Integer> gradesList = new ArrayList<>();
-                    ArrayList<Integer> weightsList = new ArrayList<>();
-                    int weightSum = 0;
-                    int gradeWeightSum = 0;
+                    ArrayList<Double> gradesList = new ArrayList<>();
+                    ArrayList<Double> weightsList = new ArrayList<>();
+                    double weightSum = 0;
+                    double gradeWeightSum = 0;
 
                     for(int i = 0 ; i < textViewArrayList.size();i=i+2){
-                        int aux = Integer.parseInt(textViewArrayList.get(i).getText().toString());
+                        double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
                         gradesList.add(aux);
                     }
 
                     for(int i = 1 ; i < textViewArrayList.size();i=i+2){
-                        int aux = Integer.parseInt(textViewArrayList.get(i).getText().toString());
+                        double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
                         weightsList.add(aux);
                     }
                     for(int i = 0 ; i < gradesList.size() ; i++){
                         gradeWeightSum = gradeWeightSum + gradesList.get(i)*weightsList.get(i);
                         weightSum = weightSum + weightsList.get(i);
                     }
+                    double finalGrade = gradeWeightSum/weightSum;
+                    Bundle resultBundle = new Bundle();
+                    resultBundle.putDouble("RESULT", finalGrade);
+                    Intent intent = new Intent(this, ResultActivity.class);
+                    intent.putExtras(resultBundle);
+                    startActivity(intent);
                     break;
                 default:
                     break;
