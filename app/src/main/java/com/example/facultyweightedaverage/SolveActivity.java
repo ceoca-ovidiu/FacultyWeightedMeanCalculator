@@ -321,9 +321,9 @@ public class SolveActivity extends AppCompatActivity {
             }
         };
 
+        int textViewBackground = R.drawable.textview_background_rounded_slim_stroke;
         for (int i = 0; i < numberOfClasses; i++) {
-            int textViewBackground = R.drawable.textview_background_rounded_lightgrey;
-            EditText nameEditText = createEditText(yCord + 15, "Materia " + (i + 1), textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            EditText nameEditText = createEditText(yCord + 15, "Class " + (i + 1), textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
             TextView gradeTextView = createTextView(480, yCord + 15, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
             TextView weightTextView = createTextView(650, yCord + 15, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
@@ -340,7 +340,7 @@ public class SolveActivity extends AppCompatActivity {
 
         yCord = 20;
         int buttonId = 21;
-        int buttonBackground = R.drawable.button_background_rounded_orange_bluestroke;
+        int buttonBackground = R.drawable.button_background_rounded_orange_slim_stroke;
         for (int i = 0; i < numberOfClasses; i++) {
 
             Button plusGradeButton = createButton(buttonId, buttonClick, 480, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(150, 120));
