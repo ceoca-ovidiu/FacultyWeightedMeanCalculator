@@ -8,7 +8,7 @@
     tools:context=".InfoActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/classTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -19,13 +19,13 @@
         android:text="@string/class_text"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/gradeTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/weightTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
@@ -37,11 +37,11 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/gradeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/gradeTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
@@ -51,13 +51,13 @@
         android:text="@string/grade"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/weightTextView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/classTextView"
+        app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/infoTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -66,7 +66,7 @@
         android:gravity="center"
         android:text="@string/info_title"
         android:textColor="@color/dark_blue"
-        android:textSize="40sp"
+        android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,11 +84,11 @@
         android:text="@string/plus"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/gradeTextView"
         app:layout_constraintEnd_toStartOf="@+id/plusWeightButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -104,11 +104,11 @@
         android:text="@string/minus"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/weightTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/plusGradeButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -125,7 +125,7 @@
         app:layout_constraintEnd_toStartOf="@+id/minusWeightButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/gradeTextView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minusWeightButton"
@@ -142,10 +142,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/minusGradeButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/weightTextView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/infoTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="380dp"
