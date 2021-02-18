@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 int numberOfClasses = Integer.parseInt(auxString);
                 Bundle bundle = new Bundle();
                 bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
-                Intent intent = new Intent(MainActivity.this, SolveActivity.class);
+                Intent intent = new Intent(MainActivity.this, ClassesNamesActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

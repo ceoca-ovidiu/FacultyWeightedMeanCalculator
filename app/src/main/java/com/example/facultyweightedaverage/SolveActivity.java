@@ -31,7 +31,8 @@ public class SolveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_solve);
         Bundle bundle = getIntent().getExtras();
         RelativeLayout relativeLayout = findViewById(R.id.solveRelativeLayout);
-        int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES");
+        int numberOfClasses = bundle.getInt("CLASSES_NUMBER");
+        ArrayList<String> classesNamesArrayList = bundle.getStringArrayList("CLASSES_NAMES_ARRAY");
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
         parameters.height = numberOfClasses * 450;
         relativeLayout.setLayoutParams(parameters);
@@ -405,7 +406,7 @@ public class SolveActivity extends AppCompatActivity {
 
         int textViewBackground = R.drawable.textview_background_rounded_slim_stroke;
         for (int i = 0; i < numberOfClasses; i++) {
-            EditText nameEditText = createEditText(yCord + 15, "Class " + (i + 1), textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            EditText nameEditText = createEditText(yCord + 15, textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT), classesNamesArrayList);
             TextView gradeTextView = createTextView(480, yCord + 15, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
             TextView weightTextView = createTextView(650, yCord + 15, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
@@ -536,19 +537,21 @@ public class SolveActivity extends AppCompatActivity {
 
         return textView;
     }
-
-    private EditText createEditText(float yCoord, String hintText, int background, RelativeLayout.LayoutParams params) {
+    int counter = 0;
+    private EditText createEditText(float yCoord, int background, RelativeLayout.LayoutParams params, ArrayList<String> classesNameArrayList) {
 
         EditText editText = new EditText(this);
         editText.setHeight(120);
         editText.setWidth(400);
         editText.setX((float) 60);
         editText.setY(yCoord);
-        editText.setHint(hintText);
-        editText.setHintTextColor(Color.parseColor("#000000"));
+        editText.setText(classesNameArrayList.get(counter));
+        counter++;
+        editText.setFocusable(false);
         editText.setTextSize((float) 20);
         editText.setTextColor(Color.parseColor("#000000"));
         editText.setPadding(50,10,10,10);
+       // editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
 

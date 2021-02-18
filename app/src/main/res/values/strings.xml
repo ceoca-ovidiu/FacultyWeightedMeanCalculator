@@ -10,4 +10,6 @@
     <string name="grade">Grade</string>
     <string name="weight">Weight</string>
     <string name="class_text">Class</string>
+    <string name="skip">SKIP</string>
+    <string name="next">Next</string>
 </resources>
