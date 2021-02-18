@@ -468,10 +468,11 @@ public class SolveActivity extends AppCompatActivity {
                 weightSum = weightSum + weightsList.get(i);
             }
             double finalGrade = gradeWeightSum/weightSum;
-            Bundle resultBundle = new Bundle();
-            resultBundle.putDouble("RESULT", finalGrade);
+            bundle.putDouble("RESULT", finalGrade);
+            bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
+            bundle.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArrayList);
             Intent intent = new Intent(SolveActivity.this, ResultActivity.class);
-            intent.putExtras(resultBundle);
+            intent.putExtras(bundle);
             startActivity(intent);
         });
 

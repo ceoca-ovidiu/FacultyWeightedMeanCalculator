@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,14 +78,24 @@ public class MainActivity extends AppCompatActivity {
 
         doneButton.setOnClickListener(v -> {
             buttonVibrate();
-            String auxString = numberOfClassesTextView.getText().toString();
-            if(auxString.isEmpty()){
+            String numberOfClassesAsString = numberOfClassesTextView.getText().toString();
+            if(numberOfClassesAsString.isEmpty()){
                 Toast.makeText(this, "Use the buttons to enter the number of classes", Toast.LENGTH_SHORT).show();
             } else {
-                int numberOfClasses = Integer.parseInt(auxString);
+                int numberOfClasses = Integer.parseInt(numberOfClassesAsString);
                 Bundle bundle = new Bundle();
                 bundle.putInt("NUMBER_OF_CLASSES",numberOfClasses);
-                if(skipClassesNamesSwitch.isChecked()){
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences",0);
+                int sharedNumberOfClasses = preferences.getInt("numberOfClasses",0);
+                if(sharedNumberOfClasses == numberOfClasses && skipClassesNamesSwitch.isChecked()){
+                    Set<String> classesNamesStringSet = preferences.getStringSet("classesNames",null); //TODO : de vazut faza cu null
+                    classesNamesArray.clear();
+                    classesNamesArray.addAll(classesNamesStringSet);
+                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
+                    Intent intent = new Intent(MainActivity.this, SolveActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else if(skipClassesNamesSwitch.isChecked()){
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
                     intent.putExtras(bundle);
