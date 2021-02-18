@@ -1,17 +1,22 @@
 package com.example.facultyweightedaverage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
         Button doneButton = findViewById(R.id.doneButton);
         ImageButton infoButton = findViewById(R.id.infoImageButton);
         TextView numberOfClassesTextView = findViewById(R.id.numberOfClassesTextView);
+        ArrayList<String> classesNamesArray = new ArrayList<>();
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch skipClassesNamesSwitch = findViewById(R.id.skipClassesNamesSwitch);
+
+        for(int i = 0 ; i < 20 ; i++){
+            classesNamesArray.add("Class " + (i+1));
+        }
+
         plusButton.setOnClickListener(v -> {
             String auxString = numberOfClassesTextView.getText().toString();
             if (auxString.isEmpty()) {
@@ -43,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         minusButton.setOnClickListener(v -> {
             String auxString = numberOfClassesTextView.getText().toString();
@@ -65,31 +76,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
         doneButton.setOnClickListener(v -> {
+            buttonVibrate();
             String auxString = numberOfClassesTextView.getText().toString();
             if(auxString.isEmpty()){
-                buttonVibrate();
                 Toast.makeText(this, "Use the buttons to enter the number of classes", Toast.LENGTH_SHORT).show();
-            }else{
-                buttonVibrate();
+            } else {
                 int numberOfClasses = Integer.parseInt(auxString);
                 Bundle bundle = new Bundle();
-                bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
-                Intent intent = new Intent(MainActivity.this, ClassesNamesActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                bundle.putInt("NUMBER_OF_CLASSES",numberOfClasses);
+                if(skipClassesNamesSwitch.isChecked()){
+                    Intent intent = new Intent(MainActivity.this, SolveActivity.class);
+                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, ClassesNamesActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
 
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buttonVibrate();
-                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                startActivity(intent);
-            }
+        infoButton.setOnClickListener(v -> {
+            buttonVibrate();
+            Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+            startActivity(intent);
         });
-
-
     }
 
     private void buttonVibrate (){

@@ -3,6 +3,7 @@ package com.example.facultyweightedaverage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -29,10 +30,13 @@ public class SolveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solve);
-        Bundle bundle = getIntent().getExtras();
+
         RelativeLayout relativeLayout = findViewById(R.id.solveRelativeLayout);
-        int numberOfClasses = bundle.getInt("CLASSES_NUMBER");
+
+        Bundle bundle = getIntent().getExtras();
+        int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES");
         ArrayList<String> classesNamesArrayList = bundle.getStringArrayList("CLASSES_NAMES_ARRAY");
+
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
         parameters.height = numberOfClasses * 450;
         relativeLayout.setLayoutParams(parameters);

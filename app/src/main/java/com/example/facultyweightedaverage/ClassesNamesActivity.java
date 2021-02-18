@@ -2,17 +2,16 @@ package com.example.facultyweightedaverage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,14 +24,15 @@ public class ClassesNamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_names);
-        ArrayList<String> classesNamesArrayList = new ArrayList<>();
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(60,40,60,40);
-        Bundle bundle = getIntent().getExtras();
-        int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES");
 
+        ArrayList<String> classesNamesArrayList = new ArrayList<>();
         Button nextButton = findViewById(R.id.nextButton);
         LinearLayout linearLayout = findViewById(R.id.classesNamesLinearLayout);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(60, 40, 60, 40);
+
+        Bundle bundle = getIntent().getExtras();
+        int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES", 0);
 
         int textViewBackground = R.drawable.textview_background_rounded_slim_stroke;
 
@@ -44,33 +44,29 @@ public class ClassesNamesActivity extends AppCompatActivity {
         nextButton.setOnClickListener(v -> {
             buttonVibrate();
             boolean isComplete = true;
-            for(int i = 0 ; i < linearLayout.getChildCount() ; i++){
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
                 View view = linearLayout.getChildAt(i);
-                if(((EditText) view).getText().toString().isEmpty()){
+                if (((EditText) view).getText().toString().isEmpty()) {
                     isComplete = false;
                 }
             }
 
-            if(isComplete){
-                for(int i = 0 ; i < linearLayout.getChildCount() ; i++){
+            if (isComplete) {
+                for (int i = 0; i < linearLayout.getChildCount(); i++) {
                     View view = linearLayout.getChildAt(i);
-                    if (view instanceof EditText){
+                    if (view instanceof EditText) {
                         classesNamesArrayList.add(((EditText) view).getText().toString());
                     }
                 }
                 Intent intent = new Intent(ClassesNamesActivity.this, SolveActivity.class);
-                Bundle bundle1 = new Bundle();
-                bundle1.putInt("CLASSES_NUMBER", numberOfClasses);
-                bundle1.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArrayList);
-                intent.putExtras(bundle1);
+                bundle.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArrayList);
+                bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
+                intent.putExtras(bundle);
                 startActivity(intent);
-            }else{
+            } else {
                 Toast.makeText(this, "Empty field", Toast.LENGTH_SHORT).show();
             }
-
-
         });
-
     }
 
     private EditText createEditText(String hintText, int background, LinearLayout.LayoutParams params) {
@@ -83,11 +79,10 @@ public class ClassesNamesActivity extends AppCompatActivity {
         editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
-
         return editText;
     }
 
-    private void buttonVibrate (){
+    private void buttonVibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         int VIBRATE_TIME = 4;
         vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_TIME, VibrationEffect.DEFAULT_AMPLITUDE));

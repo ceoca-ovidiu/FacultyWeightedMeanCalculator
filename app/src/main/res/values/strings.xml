@@ -12,4 +12,5 @@
     <string name="class_text">Class</string>
     <string name="skip">SKIP</string>
     <string name="next">Next</string>
+    <string name="skip_entering_classes_names">Skip entering classes names</string>
 </resources>
