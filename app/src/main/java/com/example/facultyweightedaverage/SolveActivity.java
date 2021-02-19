@@ -499,7 +499,10 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private void addWeight(int indexTextView) {
-        textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) + 1));
+        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 80)
+            Toast.makeText(SolveActivity.this, "The maximum amount of points is 80", Toast.LENGTH_SHORT).show();
+        else
+            textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) + 1));
     }
 
     private void substractWeight(int indexTextView) {

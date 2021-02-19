@@ -19,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_background_rounded_orange_slim_stroke"
+        android:background="@drawable/button_background_rounded_orange_bluestroke"
         android:gravity="center"
         android:text="@string/next"
         android:textColor="@color/grey"
