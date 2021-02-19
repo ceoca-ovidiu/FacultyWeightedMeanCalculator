@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<String> classesNamesArray = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Button doneButton = findViewById(R.id.doneButton);
         ImageButton infoButton = findViewById(R.id.infoImageButton);
         TextView numberOfClassesTextView = findViewById(R.id.numberOfClassesTextView);
-        ArrayList<String> classesNamesArray = new ArrayList<>();
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch skipClassesNamesSwitch = findViewById(R.id.skipClassesNamesSwitch);
 
         for(int i = 0 ; i < 20 ; i++){
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }else if(skipClassesNamesSwitch.isChecked()){
+                }else if(sharedNumberOfClasses != numberOfClasses && skipClassesNamesSwitch.isChecked()){
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
                     intent.putExtras(bundle);
@@ -113,6 +114,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, InfoActivity.class);
             startActivity(intent);
         });
+    }
+
+    protected void onPause() {
+        super.onPause();
+        classesNamesArray.clear();
+        for(int i = 0 ; i < 20 ; i++){
+            classesNamesArray.add("Class " + (i+1));
+        }
     }
 
     private void buttonVibrate (){
