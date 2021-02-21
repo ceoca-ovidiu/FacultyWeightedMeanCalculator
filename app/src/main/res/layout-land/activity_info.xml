@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/landscape_mode_background"
+    android:background="@drawable/info_activity_landscape"
     tools:context=".InfoActivity">
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_marginEnd="10dp"
         android:gravity="center"
         android:text="@string/info_title"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/white"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,7 +51,7 @@
         android:background="@drawable/textview_background_rounded_slim_stroke_dark_blue_75"
         android:gravity="center"
         android:text="@string/class_text"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gradeRelativeLayout"
@@ -105,7 +105,7 @@
             android:background="@drawable/textview_background_rounded_slim_stroke_dark_blue_75"
             android:gravity="center"
             android:text="@string/grade"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="170dp"
             tools:layout_editor_absoluteY="341dp" />
@@ -178,7 +178,7 @@
             android:background="@drawable/textview_background_rounded_slim_stroke_dark_blue_75"
             android:gravity="center"
             android:text="@string/weight"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="296dp"
             tools:layout_editor_absoluteY="348dp" />
