@@ -96,15 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }else if(sharedNumberOfClasses != numberOfClasses && skipClassesNamesSwitch.isChecked()){
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }else{
                     Intent intent = new Intent(MainActivity.this, ClassesNamesActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
         });
@@ -113,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             buttonVibrate();
             Intent intent = new Intent(MainActivity.this, InfoActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
     }
 

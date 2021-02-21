@@ -2,7 +2,6 @@ package com.example.facultyweightedaverage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -34,7 +33,7 @@ public class ClassesNamesActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES", 0);
 
-        int textViewBackground = R.drawable.textview_background_rounded_slim_stroke;
+        int textViewBackground = R.drawable.textview_background_rounded_slim_stroke_dark_blue_75;
 
         for (int i = 0; i < numberOfClasses; i++) {
             EditText nameEditText = createEditText("Class " + (i + 1), textViewBackground, layoutParams);
@@ -63,6 +62,7 @@ public class ClassesNamesActivity extends AppCompatActivity {
                 bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
                 Toast.makeText(this, "Empty field", Toast.LENGTH_SHORT).show();
             }
@@ -73,9 +73,9 @@ public class ClassesNamesActivity extends AppCompatActivity {
 
         EditText editText = new EditText(this);
         editText.setHint(hintText);
-        editText.setHintTextColor(Color.parseColor("#000000"));
+        editText.setHintTextColor(Color.parseColor("#FFFFFF"));
         editText.setTextSize((float) 20);
-        editText.setTextColor(Color.parseColor("#000000"));
+        editText.setTextColor(Color.parseColor("#FFFFFF"));
         editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
@@ -86,5 +86,11 @@ public class ClassesNamesActivity extends AppCompatActivity {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         int VIBRATE_TIME = 4;
         vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_TIME, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

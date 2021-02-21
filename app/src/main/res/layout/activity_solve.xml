@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_background"
+    android:background="@drawable/solve_activity"
     tools:context=".SolveActivity">
 
     <ScrollView
@@ -14,7 +14,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="170dp"
+        android:background="@drawable/scrollview_background_rounded_blue_stroke"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,9 +23,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/scrollview_background_rounded_blue_stroke"
-        >
+        app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
             android:id="@+id/solveRelativeLayout"
@@ -48,10 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="45dp"
-        android:background="@drawable/button_background_rounded_orange_bluestroke"
+        android:background="@drawable/button_background_rounded_white_bluestroke"
         android:gravity="center"
         android:text="@string/done"
-        android:textColor="@color/grey"
+        android:textColor="@color/very_dark_blue"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

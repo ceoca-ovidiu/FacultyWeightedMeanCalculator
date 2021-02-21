@@ -3,7 +3,6 @@ package com.example.facultyweightedaverage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -408,7 +407,7 @@ public class SolveActivity extends AppCompatActivity {
             }
         };
 
-        int textViewBackground = R.drawable.textview_background_rounded_slim_stroke;
+        int textViewBackground = R.drawable.textview_background_rounded_slim_stroke_dark_blue_75;
         for (int i = 0; i < numberOfClasses; i++) {
             EditText nameEditText = createEditText(yCord + 15, textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT), classesNamesArrayList);
             TextView gradeTextView = createTextView(480, yCord + 15, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
@@ -474,6 +473,7 @@ public class SolveActivity extends AppCompatActivity {
             Intent intent = new Intent(SolveActivity.this, ResultActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
     }
@@ -522,6 +522,7 @@ public class SolveActivity extends AppCompatActivity {
         button.setY(yCoord);
         button.setText(text);
         button.setTextSize((float) 20);
+        button.setTextColor(Color.parseColor("#03045E"));
         button.setPadding(10,10,10,10);
         button.setBackgroundResource(background);
         button.setLayoutParams(layoutParams);
@@ -538,7 +539,7 @@ public class SolveActivity extends AppCompatActivity {
         textView.setY(yCoord);
         textView.setText(text);
         textView.setTextSize((float) 20);
-        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setTextColor(Color.parseColor("#FFFFFF"));
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundResource(background);
         textView.setLayoutParams(params);
@@ -557,12 +558,18 @@ public class SolveActivity extends AppCompatActivity {
         counter++;
         editText.setFocusable(false);
         editText.setTextSize((float) 20);
-        editText.setTextColor(Color.parseColor("#000000"));
+        editText.setTextColor(Color.parseColor("#FFFFFF"));
         editText.setPadding(50,10,10,10);
        // editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
 
         return editText;
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

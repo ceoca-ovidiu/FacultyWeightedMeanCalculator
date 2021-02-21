@@ -18,7 +18,7 @@
         android:layout_marginTop="145dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="180dp"
-        android:background="@drawable/button_background_rounded_orange_bluestroke"
+        android:background="@drawable/button_background_rounded_white_bluestroke"
         android:gravity="center"
         android:text="@string/next"
         android:textColor="@color/grey"
