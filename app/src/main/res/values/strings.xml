@@ -5,7 +5,7 @@
     <string name="plus">+</string>
     <string name="done">Done</string>
     <string name="final_grade_result">FINAL GRADE</string>
-    <string name="info">This app is useful for the students who want to find their general grade of the semester, grade which is based on a weight assigned to the final exam grade</string>
+    <string name="info">This app is made for the students who want to find their general grade of the semester, grade which is based on a weight assigned to the final exam grade.</string>
     <string name="info_title">Info</string>
     <string name="grade">Grade</string>
     <string name="weight">Weight</string>
@@ -14,4 +14,5 @@
     <string name="next">Next</string>
     <string name="skip_entering_classes_names">Skip entering classes names</string>
     <string name="save_classes">SAVE CLASSES</string>
+    <string name="save_button_info">If you save the classes, next time you open the app and enter the same number and check skip classes names, the app will autocomplete the classes for you.</string>
 </resources>

@@ -485,6 +485,7 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private void addGrade(int indexTextView) {
+        textViewArrayList.get(indexTextView).setTextColor(Color.parseColor("#FFFFFF"));
         if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 10)
             Toast.makeText(SolveActivity.this, "The maximum grade is 10", Toast.LENGTH_SHORT).show();
         else
@@ -492,10 +493,17 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private void substractGrade(int indexTextView) {
-        if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5)
-            Toast.makeText(SolveActivity.this, "The minimum grade is 5", Toast.LENGTH_SHORT).show();
-        else
+        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5){
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
+            textViewArrayList.get(indexTextView).setTextColor(Color.parseColor("#cc0000"));
+        }else if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 4){
+            Toast.makeText(SolveActivity.this, "The minimum grade is 4", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            textViewArrayList.get(indexTextView).setTextColor(Color.parseColor("#FFFFFF"));
+            textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
+        }
+
     }
 
     private void addWeight(int indexTextView) {

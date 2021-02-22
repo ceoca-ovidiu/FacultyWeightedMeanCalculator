@@ -2,12 +2,18 @@ package com.example.facultyweightedaverage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +61,23 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
+        saveButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public boolean onLongClick(View v) {
+
+                Dialog dialog = new Dialog(ResultActivity.this);
+                dialog.setContentView(R.layout.activity_dialog);
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
+                dialog.getWindow().setLayout(1200, 1200);
+                dialog.setCancelable(true);
+                dialog.show();
+
+                return true;
+            }
+        });
     }
+
 
     private void buttonVibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
