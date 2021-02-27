@@ -1,4 +1,4 @@
-package com.example.facultyweightedaverage;
+package com.coolgrade.facultyweightedaverage;
 
 import android.content.Context;
 import android.content.Intent;

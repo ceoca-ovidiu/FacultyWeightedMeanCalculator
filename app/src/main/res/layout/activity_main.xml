@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_activity"
+    android:id="@+id/mainConstraintLayout"
     tools:context=".MainActivity">
 
 
@@ -62,7 +63,7 @@
         android:id="@+id/numberOfClassesTextView"
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="165dp"
         android:background="@drawable/textview_background_rounded_white"
         android:gravity="center"
         android:hint="@string/number_of_classes"

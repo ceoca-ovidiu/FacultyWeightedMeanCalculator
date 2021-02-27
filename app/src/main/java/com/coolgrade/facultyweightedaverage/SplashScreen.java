@@ -1,4 +1,4 @@
-package com.example.facultyweightedaverage;
+package com.coolgrade.facultyweightedaverage;
 
 import androidx.appcompat.app.AppCompatActivity;
 

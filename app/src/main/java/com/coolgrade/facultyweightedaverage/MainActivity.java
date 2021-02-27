@@ -1,4 +1,4 @@
-package com.example.facultyweightedaverage;
+package com.coolgrade.facultyweightedaverage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Switch;
@@ -15,18 +14,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> classesNamesArray = new ArrayList<>();
+    private final ArrayList<String> classesNamesArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
+        boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
+
+        ConstraintLayout mainConstraintLayout = findViewById(R.id.mainConstraintLayout);
+
+        if (isDarkModeActive) {
+            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity);
+        } else {
+            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity_dark_mode);
+        }
 
         Button plusButton = findViewById(R.id.plusButton);
         Button minusButton = findViewById(R.id.minusButton);
@@ -35,9 +46,8 @@ public class MainActivity extends AppCompatActivity {
         TextView numberOfClassesTextView = findViewById(R.id.numberOfClassesTextView);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch skipClassesNamesSwitch = findViewById(R.id.skipClassesNamesSwitch);
 
-        for(int i = 0 ; i < 20 ; i++){
-            classesNamesArray.add("Class " + (i+1));
-        }
+        setDefaultClassesNames();
+        // setBackground(isDarkModeActive);
 
         plusButton.setOnClickListener(v -> {
             String auxString = numberOfClassesTextView.getText().toString();
@@ -46,11 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 numberOfClassesTextView.setText("1");
             } else {
                 int auxInt = Integer.parseInt(auxString);
-                if (auxInt > 19){
+                if (auxInt > 19) {
                     buttonVibrate();
                     Toast.makeText(MainActivity.this, "Number too high", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     buttonVibrate();
                     numberOfClassesTextView.setText(String.valueOf(auxInt + 1));
                 }
@@ -68,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 if (auxInt <= 1) {
                     buttonVibrate();
                     Toast.makeText(MainActivity.this, "Number too low", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     buttonVibrate();
                     numberOfClassesTextView.setText(String.valueOf(auxInt - 1));
                 }
@@ -80,30 +88,29 @@ public class MainActivity extends AppCompatActivity {
         doneButton.setOnClickListener(v -> {
             buttonVibrate();
             String numberOfClassesAsString = numberOfClassesTextView.getText().toString();
-            if(numberOfClassesAsString.isEmpty()){
+            if (numberOfClassesAsString.isEmpty()) {
                 Toast.makeText(this, "Use the buttons to enter the number of classes", Toast.LENGTH_SHORT).show();
             } else {
                 int numberOfClasses = Integer.parseInt(numberOfClassesAsString);
                 Bundle bundle = new Bundle();
-                bundle.putInt("NUMBER_OF_CLASSES",numberOfClasses);
-                SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences",0);
-                int sharedNumberOfClasses = preferences.getInt("numberOfClasses",0);
-                if(sharedNumberOfClasses == numberOfClasses && skipClassesNamesSwitch.isChecked()){
-                    Set<String> classesNamesStringSet = preferences.getStringSet("classesNames",null); //TODO : de vazut faza cu null
+                bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
+                int sharedNumberOfClasses = preferences.getInt("numberOfClasses", 0);
+                if (sharedNumberOfClasses == numberOfClasses && skipClassesNamesSwitch.isChecked()) {
+                    Set<String> classesNamesStringSet = preferences.getStringSet("classesNames", null); //TODO : de vazut faza cu null
                     classesNamesArray.clear();
                     classesNamesArray.addAll(classesNamesStringSet);
-                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
+                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArray);
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }else if(sharedNumberOfClasses != numberOfClasses && skipClassesNamesSwitch.isChecked()){
+                } else if (sharedNumberOfClasses != numberOfClasses && skipClassesNamesSwitch.isChecked()) {
                     Intent intent = new Intent(MainActivity.this, SolveActivity.class);
-                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY",classesNamesArray);
+                    bundle.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArray);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }else{
+                } else {
                     Intent intent = new Intent(MainActivity.this, ClassesNamesActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -123,14 +130,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         classesNamesArray.clear();
-        for(int i = 0 ; i < 20 ; i++){
-            classesNamesArray.add("Class " + (i+1));
+        for (int i = 0; i < 20; i++) {
+            classesNamesArray.add("Class " + (i + 1));
         }
     }
 
-    private void buttonVibrate (){
+    private void buttonVibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         int VIBRATE_TIME = 4;
         vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_TIME, VibrationEffect.DEFAULT_AMPLITUDE));
     }
+
+    private void setDefaultClassesNames() {
+        for (int i = 0; i < 20; i++) {
+            classesNamesArray.add("Class " + (i + 1));
+        }
+    }
+
+/*    private void setBackground(Boolean isDarkModeActive){
+
+        if(isDarkModeActive){
+            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity);
+        }else{
+            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity_dark_mode);
+        }
+
+    }*/
+
 }

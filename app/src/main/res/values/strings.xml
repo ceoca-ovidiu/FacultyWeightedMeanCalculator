@@ -15,4 +15,6 @@
     <string name="skip_entering_classes_names">Skip entering classes names</string>
     <string name="save_classes">SAVE CLASSES</string>
     <string name="save_button_info">If you save the classes, next time you open the app and enter the same number and check skip classes names, the app will autocomplete the classes for you.</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

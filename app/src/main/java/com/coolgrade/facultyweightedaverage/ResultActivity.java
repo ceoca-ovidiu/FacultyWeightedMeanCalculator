@@ -1,4 +1,4 @@
-package com.example.facultyweightedaverage;
+package com.coolgrade.facultyweightedaverage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,18 +9,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

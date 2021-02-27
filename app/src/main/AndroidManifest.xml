@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.facultyweightedaverage">
+    package="com.coolgrade.facultyweightedaverage">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FacultyWeightedAverage">
         <activity
-            android:name=".ClassesNamesActivity"
+            android:name="com.coolgrade.facultyweightedaverage.ClassesNamesActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".InfoActivity"
+            android:name="com.coolgrade.facultyweightedaverage.InfoActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.coolgrade.facultyweightedaverage.SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,13 +27,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResultActivity"
+            android:name="com.coolgrade.facultyweightedaverage.ResultActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".SolveActivity"
+            android:name="com.coolgrade.facultyweightedaverage.SolveActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.coolgrade.facultyweightedaverage.MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
