@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/result_activity"
+    android:id="@+id/resultPortraitConstraintLayout"
     tools:context=".ResultActivity">
 
     <androidx.appcompat.widget.AppCompatButton

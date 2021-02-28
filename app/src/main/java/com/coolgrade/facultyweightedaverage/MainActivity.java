@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -31,13 +32,27 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
         boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
 
-        ConstraintLayout mainConstraintLayout = findViewById(R.id.mainConstraintLayout);
+        ConstraintLayout mainPortraitConstraintLayout = findViewById(R.id.mainPortraitConstraintLayout);
+        ConstraintLayout mainLandscapeConstraintLayout = findViewById(R.id.mainLandscapeConstraintLayout);
 
-        if (isDarkModeActive) {
-            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity);
-        } else {
-            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity_dark_mode);
+        if(MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            if (isDarkModeActive) {
+                mainPortraitConstraintLayout.setBackgroundResource(R.drawable.main_activity_dark_mode);
+            } else {
+                mainPortraitConstraintLayout.setBackgroundResource(R.drawable.main_activity);
+            }
+
+        }else{
+
+            if (isDarkModeActive) {
+                mainLandscapeConstraintLayout.setBackgroundResource(R.drawable.main_activity_landscape_dark_mode);
+            } else {
+                 mainLandscapeConstraintLayout.setBackgroundResource(R.drawable.main_activity_landscape);
+            }
+
         }
+
 
         Button plusButton = findViewById(R.id.plusButton);
         Button minusButton = findViewById(R.id.minusButton);
@@ -47,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch skipClassesNamesSwitch = findViewById(R.id.skipClassesNamesSwitch);
 
         setDefaultClassesNames();
-        // setBackground(isDarkModeActive);
 
         plusButton.setOnClickListener(v -> {
             String auxString = numberOfClassesTextView.getText().toString();
@@ -146,15 +160,4 @@ public class MainActivity extends AppCompatActivity {
             classesNamesArray.add("Class " + (i + 1));
         }
     }
-
-/*    private void setBackground(Boolean isDarkModeActive){
-
-        if(isDarkModeActive){
-            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity);
-        }else{
-            mainConstraintLayout.setBackgroundResource(R.drawable.main_activity_dark_mode);
-        }
-
-    }*/
-
 }

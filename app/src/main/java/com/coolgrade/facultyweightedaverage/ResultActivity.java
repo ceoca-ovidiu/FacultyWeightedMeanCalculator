@@ -1,11 +1,10 @@
 package com.coolgrade.facultyweightedaverage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -13,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -28,6 +30,30 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
+        boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
+
+        ConstraintLayout resultPortraitConstraintLayout = findViewById(R.id.resultPortraitConstraintLayout);
+        ConstraintLayout resultLandscapeConstraintLayout = findViewById(R.id.resultLandscapeConstraintLayout);
+
+        if (ResultActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            if (!isDarkModeActive) {
+                resultPortraitConstraintLayout.setBackgroundResource(R.drawable.result_activity);
+            } else {
+                resultPortraitConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode);
+            }
+
+        } else {
+
+            if (!isDarkModeActive) {
+                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.main_activity_landscape);
+            } else {
+                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode);
+            }
+
+        }
+
         DecimalFormat numberFormat = new DecimalFormat("#.00");
         Bundle bundle = getIntent().getExtras();
         double finalGrade = bundle.getDouble("RESULT");
@@ -42,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(v -> {
             buttonVibrate();
-            if(!alreadySaved){
+            if (!alreadySaved) {
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.clear();
@@ -51,7 +77,7 @@ public class ResultActivity extends AppCompatActivity {
                 editor.putStringSet("classesNames", classesNamesStringSet);
                 editor.apply();
                 alreadySaved = true;
-            }else{
+            } else {
                 Toast.makeText(ResultActivity.this, "Already saved", Toast.LENGTH_SHORT).show();
             }
         });

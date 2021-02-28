@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/solve_activity_landscape"
+    android:id="@+id/solveLandscapeConstraintLayout"
     tools:context=".SolveActivity">
 
     <ScrollView

@@ -3,6 +3,8 @@ package com.coolgrade.facultyweightedaverage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -17,12 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
 public class SolveActivity extends AppCompatActivity {
 
     private final ArrayList<TextView> textViewArrayList = new ArrayList<>();
+    int counter = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,14 +34,36 @@ public class SolveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solve);
 
-        RelativeLayout relativeLayout = findViewById(R.id.solveRelativeLayout);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
+        boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
 
+        ConstraintLayout solvePortraitConstraintLayout = findViewById(R.id.solvePortraitConstraintLayout);
+        ConstraintLayout solveLandscapeConstraintLayout = findViewById(R.id.solveLandscapeConstraintLayout);
+
+        if (SolveActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            if (!isDarkModeActive) {
+                solvePortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity);
+            } else {
+                solvePortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity_dark_mode);
+            }
+        } else {
+
+            if (!isDarkModeActive) {
+                solveLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape);
+            } else {
+                solveLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape_dark_mode);
+            }
+        }
+
+        RelativeLayout relativeLayout = findViewById(R.id.solveRelativeLayout);
+        float density = SolveActivity.this.getResources().getDisplayMetrics().density;
         Bundle bundle = getIntent().getExtras();
         int numberOfClasses = bundle.getInt("NUMBER_OF_CLASSES");
         ArrayList<String> classesNamesArrayList = bundle.getStringArrayList("CLASSES_NAMES_ARRAY");
 
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
-        parameters.height = numberOfClasses * 500;
+        parameters.height = numberOfClasses * 500; // 430
         relativeLayout.setLayoutParams(parameters);
         Button calculateButton = findViewById(R.id.calculateButton);
         int yCord = 140;
@@ -420,7 +446,7 @@ public class SolveActivity extends AppCompatActivity {
             relativeLayout.addView(nameEditText);
             relativeLayout.addView(weightTextView);
 
-            yCord += 500;
+            yCord += 500; // 430
         }
 
         yCord = 0;
@@ -428,13 +454,13 @@ public class SolveActivity extends AppCompatActivity {
         int buttonBackground = R.drawable.button_background_rounded_orange_slim_stroke;
         for (int i = 0; i < numberOfClasses; i++) {
 
-            Button plusGradeButton = createButton(buttonId, buttonClick, 340, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            Button plusGradeButton = createButton(buttonId, buttonClick, 340, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
             buttonId++;
-            Button minusGradeButton = createButton(buttonId, buttonClick, 340, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            Button minusGradeButton = createButton(buttonId, buttonClick, 340, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
             buttonId++;
-            Button plusWeightButton = createButton(buttonId, buttonClick, 650, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+            Button plusWeightButton = createButton(buttonId, buttonClick, 650, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
             buttonId++;
-            Button minusWeightButton = createButton(buttonId, buttonClick, 650, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)); // 150 120
+            Button minusWeightButton = createButton(buttonId, buttonClick, 650, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density))); // 150 120
             buttonId++;
 
             relativeLayout.addView(plusGradeButton);
@@ -442,7 +468,7 @@ public class SolveActivity extends AppCompatActivity {
             relativeLayout.addView(plusWeightButton);
             relativeLayout.addView(minusWeightButton);
 
-            yCord += 500;
+            yCord += 500; // 430
         }
 
         calculateButton.setOnClickListener(v -> {
@@ -452,20 +478,20 @@ public class SolveActivity extends AppCompatActivity {
             double weightSum = 0;
             double gradeWeightSum = 0;
 
-            for(int i = 0 ; i < textViewArrayList.size();i=i+2){
+            for (int i = 0; i < textViewArrayList.size(); i = i + 2) {
                 double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
                 gradesList.add(aux);
             }
 
-            for(int i = 1 ; i < textViewArrayList.size();i=i+2){
+            for (int i = 1; i < textViewArrayList.size(); i = i + 2) {
                 double aux = Double.parseDouble(textViewArrayList.get(i).getText().toString());
                 weightsList.add(aux);
             }
-            for(int i = 0 ; i < gradesList.size() ; i++){
-                gradeWeightSum = gradeWeightSum + gradesList.get(i)*weightsList.get(i);
+            for (int i = 0; i < gradesList.size(); i++) {
+                gradeWeightSum = gradeWeightSum + gradesList.get(i) * weightsList.get(i);
                 weightSum = weightSum + weightsList.get(i);
             }
-            double finalGrade = gradeWeightSum/weightSum;
+            double finalGrade = gradeWeightSum / weightSum;
             bundle.putDouble("RESULT", finalGrade);
             bundle.putInt("NUMBER_OF_CLASSES", numberOfClasses);
             bundle.putStringArrayList("CLASSES_NAMES_ARRAY", classesNamesArrayList);
@@ -492,13 +518,12 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private void substractGrade(int indexTextView) {
-        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5){
+        if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 5) {
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
             textViewArrayList.get(indexTextView).setTextColor(Color.parseColor("#cc0000"));
-        }else if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 4){
+        } else if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 4) {
             Toast.makeText(SolveActivity.this, "The minimum grade is 4", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             textViewArrayList.get(indexTextView).setTextColor(Color.parseColor("#FFFFFF"));
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) - 1));
         }
@@ -506,7 +531,7 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private void addWeight(int indexTextView) {
-        if(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 80)
+        if (Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) == 80)
             Toast.makeText(SolveActivity.this, "The maximum amount of points is 80", Toast.LENGTH_SHORT).show();
         else
             textViewArrayList.get(indexTextView).setText(String.valueOf(Integer.parseInt(textViewArrayList.get(indexTextView).getText().toString()) + 1));
@@ -547,14 +572,14 @@ public class SolveActivity extends AppCompatActivity {
         textView.setText(text);
         textView.setTextSize((float) 20);
         textView.setTextColor(Color.parseColor("#FFFFFF"));
-        textView.setPadding(50,0, 50, 0);
+        textView.setPadding(50, 0, 50, 0);
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundResource(background);
         textView.setLayoutParams(params);
 
         return textView;
     }
-    int counter = 0;
+
     private EditText createEditText(float yCoord, int background, RelativeLayout.LayoutParams params, ArrayList<String> classesNameArrayList) {
 
         EditText editText = new EditText(this);
@@ -567,8 +592,8 @@ public class SolveActivity extends AppCompatActivity {
         editText.setFocusable(false);
         editText.setTextSize((float) 20);
         editText.setTextColor(Color.parseColor("#FFFFFF"));
-        editText.setPadding(50,10,50,10);
-       // editText.setGravity(Gravity.CENTER);
+        editText.setPadding(50, 10, 50, 10);
+        // editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);
 

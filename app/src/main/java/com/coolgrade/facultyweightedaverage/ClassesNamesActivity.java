@@ -2,6 +2,8 @@ package com.coolgrade.facultyweightedaverage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,30 @@ public class ClassesNamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_names);
+
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
+        boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
+
+        ConstraintLayout classesNamesPortraitConstraintLayout = findViewById(R.id.classesNamesPortraitConstraintLayout);
+        ConstraintLayout classesNamesLandscapeConstraintLayout = findViewById(R.id.classesNamesLandscapeConstraintLayout);
+
+        if (ClassesNamesActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            if (!isDarkModeActive) {
+                classesNamesPortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity);
+            } else {
+                classesNamesPortraitConstraintLayout.setBackgroundResource(R.drawable.enter_classes_names_activity_dark_mode);
+            }
+
+        } else {
+
+            if (!isDarkModeActive) {
+                classesNamesLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape);
+            } else {
+                classesNamesLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape_dark_mode);
+            }
+
+        }
 
         ArrayList<String> classesNamesArrayList = new ArrayList<>();
         Button nextButton = findViewById(R.id.nextButton);
