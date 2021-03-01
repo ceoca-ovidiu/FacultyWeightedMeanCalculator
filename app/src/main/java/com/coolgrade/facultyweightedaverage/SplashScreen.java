@@ -12,7 +12,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        int SPLASH_TIME = 1500;
+        int SPLASH_TIME = 1000;
         new Handler().postDelayed(() -> {
             Intent homeIntent = new Intent(SplashScreen.this, MainActivity.class);
             startActivity(homeIntent);

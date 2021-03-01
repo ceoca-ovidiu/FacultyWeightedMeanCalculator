@@ -8,6 +8,23 @@
     android:id="@+id/infoLandscapeConstraintLayout"
     tools:context=".InfoActivity">
 
+    <Button
+        android:id="@+id/toggleDarkModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_ripple_effect"
+        android:paddingStart="20sp"
+        android:paddingEnd="20sp"
+        android:text="@string/dark_mode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gradeRelativeLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classTextView5" />
+
     <TextView
         android:id="@+id/infoTextView2"
         android:layout_width="0dp"

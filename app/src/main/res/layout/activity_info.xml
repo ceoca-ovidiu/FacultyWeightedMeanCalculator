@@ -202,7 +202,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="@string/dark_mode"
         android:paddingStart="20sp"
         android:paddingEnd="20sp"
         android:background="@drawable/button_ripple_effect"

@@ -47,9 +47,9 @@ public class ResultActivity extends AppCompatActivity {
         } else {
 
             if (!isDarkModeActive) {
-                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.main_activity_landscape);
+                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_landscape);
             } else {
-                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode);
+                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode_landscape);
             }
 
         }

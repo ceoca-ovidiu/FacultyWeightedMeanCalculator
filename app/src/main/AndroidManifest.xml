@@ -16,7 +16,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name="com.coolgrade.facultyweightedaverage.InfoActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
         <activity
             android:name="com.coolgrade.facultyweightedaverage.SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
