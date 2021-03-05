@@ -6,7 +6,7 @@
     <string name="done">Done</string>
     <string name="final_grade_result">FINAL GRADE</string>
     <string name="info">This app is made for the students who want to find their general grade of the semester, grade which is based on a weight assigned to the final exam grade.</string>
-    <string name="info_title">Info</string>
+    <string name="info_title">INFO</string>
     <string name="grade">Grade</string>
     <string name="weight">Weight</string>
     <string name="class_text">Class</string>

@@ -2,28 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoLandscapeConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/infoLandscapeConstraintLayout"
     android:background="@drawable/info_activity_landscape_light"
     tools:context=".InfoActivity">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/toggleDarkModeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_ripple_effect"
         android:paddingStart="20sp"
         android:paddingEnd="20sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:text="@string/dark_mode"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/gradeRelativeLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classTextView5" />
+        app:layout_constraintEnd_toStartOf="@+id/infoTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/infoTextView"
@@ -37,7 +38,7 @@
         android:justificationMode="inter_word"
         android:text="@string/info"
         android:textColor="@color/dark_blue"
-        android:textSize="20sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,12 +50,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:gravity="center"
         android:text="@string/info_title"
         android:textColor="@color/white"
-        android:textSize="70sp"
+        android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,15 +64,15 @@
     <TextView
         android:id="@+id/classTextView5"
         android:layout_width="0dp"
-        android:layout_height="37dp"
+        android:layout_height="80dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/textview_background_rounded_slim_stroke_dark_blue_75"
         android:gravity="center"
         android:text="@string/class_text"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gradeRelativeLayout"
         app:layout_constraintHorizontal_bias="0.5"
@@ -81,7 +82,7 @@
     <RelativeLayout
         android:id="@+id/gradeRelativeLayout"
         android:layout_width="0dp"
-        android:layout_height="175dp"
+        android:layout_height="290dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -94,7 +95,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/plusGradeButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_above="@+id/gradeTextView"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -107,14 +108,14 @@
             android:gravity="center"
             android:text="@string/plus"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="40sp"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="256dp" />
 
         <TextView
             android:id="@+id/gradeTextView"
             android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_height="80dp"
             android:layout_above="@+id/minusGradeButton"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -125,14 +126,14 @@
             android:gravity="center"
             android:text="@string/grade"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="30sp"
             tools:layout_editor_absoluteX="170dp"
             tools:layout_editor_absoluteY="341dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minusGradeButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
@@ -143,7 +144,7 @@
             android:gravity="center"
             android:text="@string/minus"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="40sp"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="399dp" />
 
@@ -153,7 +154,7 @@
     <RelativeLayout
         android:id="@+id/weightRelativeLayout"
         android:layout_width="0dp"
-        android:layout_height="175dp"
+        android:layout_height="290dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -180,14 +181,14 @@
             android:gravity="center"
             android:text="@string/plus"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="40sp"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="256dp" />
 
         <TextView
             android:id="@+id/weightTextView"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="80dp"
             android:layout_above="@+id/minusWeightButton"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -198,14 +199,14 @@
             android:gravity="center"
             android:text="@string/weight"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="30sp"
             tools:layout_editor_absoluteX="296dp"
             tools:layout_editor_absoluteY="348dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/minusWeightButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
@@ -216,7 +217,7 @@
             android:gravity="center"
             android:text="@string/minus"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="40sp"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="399dp" />
 

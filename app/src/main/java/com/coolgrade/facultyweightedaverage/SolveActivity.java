@@ -66,10 +66,9 @@ public class SolveActivity extends AppCompatActivity {
         ArrayList<String> classesNamesArrayList = bundle.getStringArrayList("CLASSES_NAMES_ARRAY");
 
         ViewGroup.LayoutParams parameters = relativeLayout.getLayoutParams();
-        parameters.height = numberOfClasses * 500; // 430
+        parameters.height = numberOfClasses * dpToPx(160); // 430 // 500
         relativeLayout.setLayoutParams(parameters);
         Button calculateButton = findViewById(R.id.calculateButton);
-        int yCord = 140;
         View.OnClickListener buttonClick = view -> {
 
             switch (view.getId()) {
@@ -435,13 +434,15 @@ public class SolveActivity extends AppCompatActivity {
             }
         };
 
+        int yCord = dpToPx(7);
         int textViewBackground = R.drawable.textview_background_rounded_slim_stroke_dark_blue_75;
+        int yCoordIncrement = dpToPx(40);
         for (int i = 0; i < numberOfClasses; i++) {
-            EditText nameEditText = createEditText(yCord + 40, textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT), classesNamesArrayList);
-            TextView gradeTextView = createTextView(400, yCord + 40, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-
-            TextView weightTextView = createTextView(710, yCord + 40, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-
+            EditText nameEditText = createEditText(yCord + yCoordIncrement, textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT), classesNamesArrayList);
+            TextView gradeTextView = createTextView(dpToPx(140), yCord + yCoordIncrement, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                                        // 400
+            TextView weightTextView = createTextView(dpToPx(235), yCord + yCoordIncrement, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                                        // 710
             textViewArrayList.add(gradeTextView);
             textViewArrayList.add(weightTextView);
 
@@ -449,21 +450,26 @@ public class SolveActivity extends AppCompatActivity {
             relativeLayout.addView(nameEditText);
             relativeLayout.addView(weightTextView);
 
-            yCord += 500; // 430
+            yCord += dpToPx(160); // 430
         }
 
-        yCord = 0;
+        yCord = dpToPx(0);
         int buttonId = 21;
         int buttonBackground = R.drawable.button_background_rounded_orange_slim_stroke;
+        int widthButtonSize = 70;
+        int heightButtonSize = 40;
+        int xCoordGradesButton = dpToPx(135); // 340
+        int xCoordWeightButton = dpToPx(230); // 650
+
         for (int i = 0; i < numberOfClasses; i++) {
 
-            Button plusGradeButton = createButton(buttonId, buttonClick, 340, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
+            Button plusGradeButton = createButton(buttonId, buttonClick, xCoordGradesButton, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(dpToPx(widthButtonSize), dpToPx(heightButtonSize)));
             buttonId++;
-            Button minusGradeButton = createButton(buttonId, buttonClick, 340, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
+            Button minusGradeButton = createButton(buttonId, buttonClick, xCoordGradesButton, yCord + dpToPx(95), "-", buttonBackground, new RelativeLayout.LayoutParams(dpToPx(widthButtonSize), dpToPx(heightButtonSize)));
             buttonId++;
-            Button plusWeightButton = createButton(buttonId, buttonClick, 650, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density)));
+            Button plusWeightButton = createButton(buttonId, buttonClick, xCoordWeightButton, yCord, "+", buttonBackground, new RelativeLayout.LayoutParams(dpToPx(widthButtonSize), dpToPx(heightButtonSize)));
             buttonId++;
-            Button minusWeightButton = createButton(buttonId, buttonClick, 650, yCord + 310, "-", buttonBackground, new RelativeLayout.LayoutParams((int) (600 / density), (int) (350 / density))); // 150 120
+            Button minusWeightButton = createButton(buttonId, buttonClick, xCoordWeightButton, yCord + dpToPx(95), "-", buttonBackground, new RelativeLayout.LayoutParams(dpToPx(widthButtonSize), dpToPx(heightButtonSize))); // 150 120
             buttonId++;
 
             relativeLayout.addView(plusGradeButton);
@@ -471,7 +477,7 @@ public class SolveActivity extends AppCompatActivity {
             relativeLayout.addView(plusWeightButton);
             relativeLayout.addView(minusWeightButton);
 
-            yCord += 500; // 430
+            yCord += dpToPx(160); // 430
         }
 
         calculateButton.setOnClickListener(v -> {
@@ -504,6 +510,13 @@ public class SolveActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
+    }
+
+    public int dpToPx(int dp) {
+        float density = SolveActivity.this.getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 
     private void buttonVibrate() {
@@ -566,16 +579,16 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private TextView createTextView(float xCoord, float yCoord, String text, int background, RelativeLayout.LayoutParams params) {
-
+       // int padding = dpToPx(10);
         TextView textView = new TextView(this);
-        textView.setHeight(120);
-        //textView.setWidth(150);
+        textView.setHeight(dpToPx(40)); // 120
+        textView.setWidth(dpToPx(60));
         textView.setX(xCoord);
         textView.setY(yCoord);
         textView.setText(text);
-        textView.setTextSize((float) 20);
+        textView.setTextSize(dpToPx(7)); // 20 TODO : spTopx
         textView.setTextColor(Color.parseColor("#FFFFFF"));
-        textView.setPadding(50, 0, 50, 0);
+        //textView.setPadding(padding, 0, padding, 0);
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundResource(background);
         textView.setLayoutParams(params);
@@ -586,16 +599,17 @@ public class SolveActivity extends AppCompatActivity {
     private EditText createEditText(float yCoord, int background, RelativeLayout.LayoutParams params, ArrayList<String> classesNameArrayList) {
 
         EditText editText = new EditText(this);
-        editText.setHeight(120);
-        //editText.setWidth(400);
-        editText.setX((float) 20);
+        editText.setHeight(dpToPx(40));
+        editText.setWidth(dpToPx(120));
+        editText.setX(dpToPx(5));
         editText.setY(yCoord);
         editText.setText(classesNameArrayList.get(counter));
         counter++;
         editText.setFocusable(false);
-        editText.setTextSize((float) 20);
+        editText.setTextSize(dpToPx(7));
         editText.setTextColor(Color.parseColor("#FFFFFF"));
-        editText.setPadding(50, 10, 50, 10);
+        editText.setGravity(Gravity.CENTER);
+        editText.setPadding(0, dpToPx(2), 0, 10);
         // editText.setGravity(Gravity.CENTER);
         editText.setBackgroundResource(background);
         editText.setLayoutParams(params);

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -35,6 +36,7 @@ public class InfoActivity extends AppCompatActivity {
         Button plusWeightButton = findViewById(R.id.plusWeightButton);
         Button minusWeightButton = findViewById(R.id.minusWeightButton);
         Button darkModeButton = findViewById(R.id.toggleDarkModeButton);
+        TextView infoTextView = findViewById(R.id.infoTextView);
 
         int portraitLightMode = R.drawable.info_activity_portrait_light;
         int portraitDarkMode = R.drawable.info_activity_portrait_dark_mode;
@@ -60,6 +62,7 @@ public class InfoActivity extends AppCompatActivity {
                 infoLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             } else {
                 infoLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
+                infoTextView.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
         }
