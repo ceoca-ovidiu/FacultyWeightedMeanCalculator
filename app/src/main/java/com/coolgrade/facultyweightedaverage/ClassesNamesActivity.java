@@ -30,23 +30,28 @@ public class ClassesNamesActivity extends AppCompatActivity {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("Shared Preferences", 0);
         boolean isDarkModeActive = preferences.getBoolean("DARK_MODE_STATUS", false);
 
+        int portraitLightMode = R.drawable.enter_classes_names_activity_portrait_light;
+        int portraitDarkMode = R.drawable.enter_classes_names_activity_portrait_dark_mode;
+        int landscapeLightMode = R.drawable.enter_classes_names_activity_landscape_light;
+        int landscapeDarkMode = R.drawable.enter_classes_names_activity_landscape_dark_mode;
+
         ConstraintLayout classesNamesPortraitConstraintLayout = findViewById(R.id.classesNamesPortraitConstraintLayout);
         ConstraintLayout classesNamesLandscapeConstraintLayout = findViewById(R.id.classesNamesLandscapeConstraintLayout);
 
         if (ClassesNamesActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
             if (!isDarkModeActive) {
-                classesNamesPortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity);
+                classesNamesPortraitConstraintLayout.setBackgroundResource(portraitLightMode);
             } else {
-                classesNamesPortraitConstraintLayout.setBackgroundResource(R.drawable.enter_classes_names_activity_dark_mode);
+                classesNamesPortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
             }
 
         } else {
 
             if (!isDarkModeActive) {
-                classesNamesLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape);
+                classesNamesLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             } else {
-                classesNamesLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape_dark_mode);
+                classesNamesLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
             }
 
         }

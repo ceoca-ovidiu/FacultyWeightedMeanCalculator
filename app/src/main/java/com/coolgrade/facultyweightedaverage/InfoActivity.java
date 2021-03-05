@@ -1,5 +1,6 @@
 package com.coolgrade.facultyweightedaverage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ public class InfoActivity extends AppCompatActivity {
 
     private boolean isDarkModeActivated;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,25 +36,32 @@ public class InfoActivity extends AppCompatActivity {
         Button minusWeightButton = findViewById(R.id.minusWeightButton);
         Button darkModeButton = findViewById(R.id.toggleDarkModeButton);
 
+        int portraitLightMode = R.drawable.info_activity_portrait_light;
+        int portraitDarkMode = R.drawable.info_activity_portrait_dark_mode;
+        int landscapeLightMode = R.drawable.info_activity_landscape_light;
+        int landscapeDarkMode = R.drawable.info_activity_landscape_dark_mode;
+
+
+        darkModeButton.setText("Tap to change the dark/light mode");
+        darkModeButton.setTextColor(Color.parseColor("#000000"));
+
         if (InfoActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
             if (!isDarkModeActive) {
-                infoPortraitConstraintLayout.setBackgroundResource(R.drawable.info_activity);
-                darkModeButton.setTextColor(Color.parseColor("#000000"));
+                infoPortraitConstraintLayout.setBackgroundResource(portraitLightMode);
             } else {
-                infoPortraitConstraintLayout.setBackgroundResource(R.drawable.info_activity_dark_mode);
-                darkModeButton.setTextColor(Color.parseColor("#000000"));
+                infoPortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
             }
+
 
         } else {
 
             if (!isDarkModeActive) {
-                infoLandscapeConstraintLayout.setBackgroundResource(R.drawable.info_activity_landscape);
-                darkModeButton.setTextColor(Color.parseColor("#000000"));
+                infoLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             } else {
-                infoLandscapeConstraintLayout.setBackgroundResource(R.drawable.info_activity_landscape_dark_mode);
-                darkModeButton.setTextColor(Color.parseColor("#000000"));
+                infoLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
             }
+
         }
 
         plusGradeButton.setOnClickListener(v -> buttonVibrate());
@@ -67,21 +76,21 @@ public class InfoActivity extends AppCompatActivity {
 
             if (InfoActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 if (isDarkModeActivated) {
-                    infoPortraitConstraintLayout.setBackgroundResource(R.drawable.info_activity);
+                    infoPortraitConstraintLayout.setBackgroundResource(portraitLightMode);
                     darkModeButton.setText("Dark Mode");
                     isDarkModeActivated = false;
                 } else {
-                    infoPortraitConstraintLayout.setBackgroundResource(R.drawable.info_activity_dark_mode);
+                    infoPortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
                     darkModeButton.setText("Light Mode");
                     isDarkModeActivated = true;
                 }
             } else {
                 if (isDarkModeActivated) {
-                    infoLandscapeConstraintLayout.setBackgroundResource(R.drawable.info_activity_landscape);
+                    infoLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
                     darkModeButton.setText("Dark Mode");
                     isDarkModeActivated = false;
                 } else {
-                    infoLandscapeConstraintLayout.setBackgroundResource(R.drawable.info_activity_landscape_dark_mode);
+                    infoLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
                     darkModeButton.setText("Light Mode");
                     isDarkModeActivated = true;
                 }

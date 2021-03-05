@@ -36,22 +36,23 @@ public class ResultActivity extends AppCompatActivity {
         ConstraintLayout resultPortraitConstraintLayout = findViewById(R.id.resultPortraitConstraintLayout);
         ConstraintLayout resultLandscapeConstraintLayout = findViewById(R.id.resultLandscapeConstraintLayout);
 
+        int portraitLightMode = R.drawable.result_activity_portrait_light;
+        int portraitDarkMode = R.drawable.result_activity_portrait_dark_mode;
+        int landscapeLightMode = R.drawable.result_activity_landscape_light;
+        int landscapeDarkMode = R.drawable.result_activity_landscape_dark_mode;
+
         if (ResultActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-
             if (!isDarkModeActive) {
-                resultPortraitConstraintLayout.setBackgroundResource(R.drawable.result_activity);
+                resultPortraitConstraintLayout.setBackgroundResource(portraitLightMode);
             } else {
-                resultPortraitConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode);
+                resultPortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
             }
-
         } else {
-
             if (!isDarkModeActive) {
-                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_landscape);
+                resultLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             } else {
-                resultLandscapeConstraintLayout.setBackgroundResource(R.drawable.result_activity_dark_mode_landscape);
+                resultLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
             }
-
         }
 
         DecimalFormat numberFormat = new DecimalFormat("#.00");
@@ -64,7 +65,6 @@ public class ResultActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.saveButton);
         TextView displayTextView = findViewById(R.id.displayTextView);
         displayTextView.setText(numberFormat.format(finalGrade));
-
 
         saveButton.setOnClickListener(v -> {
             buttonVibrate();
@@ -98,7 +98,6 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void buttonVibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

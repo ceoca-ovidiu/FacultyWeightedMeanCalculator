@@ -40,19 +40,22 @@ public class SolveActivity extends AppCompatActivity {
         ConstraintLayout solvePortraitConstraintLayout = findViewById(R.id.solvePortraitConstraintLayout);
         ConstraintLayout solveLandscapeConstraintLayout = findViewById(R.id.solveLandscapeConstraintLayout);
 
-        if (SolveActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        int portraitLightMode = R.drawable.solve_activity_portrait_light;
+        int portraitDarkMode = R.drawable.solve_activity_portrait_dark_mode;
+        int landscapeLightMode = R.drawable.solve_activity_landscape_light;
+        int landscapeDarkMode = R.drawable.solve_activity_landscape_dark_mode;
 
+        if (SolveActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (!isDarkModeActive) {
-                solvePortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity);
+                solvePortraitConstraintLayout.setBackgroundResource(portraitLightMode);
             } else {
-                solvePortraitConstraintLayout.setBackgroundResource(R.drawable.solve_activity_dark_mode);
+                solvePortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
             }
         } else {
-
             if (!isDarkModeActive) {
-                solveLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape);
+                solveLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             } else {
-                solveLandscapeConstraintLayout.setBackgroundResource(R.drawable.solve_activity_landscape_dark_mode);
+                solveLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
             }
         }
 
