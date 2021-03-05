@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         int landscapeLightMode = R.drawable.main_activity_landscape_light;
         int landscapeDarkMode = R.drawable.main_activity_landscape_dark_mode;
 
-        if(MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
             if (isDarkModeActive) {
                 mainPortraitConstraintLayout.setBackgroundResource(portraitDarkMode);
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 mainPortraitConstraintLayout.setBackgroundResource(portraitLightMode);
             }
 
-        }else{
+        } else {
 
             if (isDarkModeActive) {
                 mainLandscapeConstraintLayout.setBackgroundResource(landscapeDarkMode);
             } else {
-                 mainLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
+                mainLandscapeConstraintLayout.setBackgroundResource(landscapeLightMode);
             }
 
         }

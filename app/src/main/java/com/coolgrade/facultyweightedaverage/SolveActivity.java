@@ -440,9 +440,9 @@ public class SolveActivity extends AppCompatActivity {
         for (int i = 0; i < numberOfClasses; i++) {
             EditText nameEditText = createEditText(yCord + yCoordIncrement, textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT), classesNamesArrayList);
             TextView gradeTextView = createTextView(dpToPx(140), yCord + yCoordIncrement, "5", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-                                                        // 400
+            // 400
             TextView weightTextView = createTextView(dpToPx(235), yCord + yCoordIncrement, "1", textViewBackground, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-                                                        // 710
+            // 710
             textViewArrayList.add(gradeTextView);
             textViewArrayList.add(weightTextView);
 
@@ -579,7 +579,7 @@ public class SolveActivity extends AppCompatActivity {
     }
 
     private TextView createTextView(float xCoord, float yCoord, String text, int background, RelativeLayout.LayoutParams params) {
-       // int padding = dpToPx(10);
+        // int padding = dpToPx(10);
         TextView textView = new TextView(this);
         textView.setHeight(dpToPx(40)); // 120
         textView.setWidth(dpToPx(60));

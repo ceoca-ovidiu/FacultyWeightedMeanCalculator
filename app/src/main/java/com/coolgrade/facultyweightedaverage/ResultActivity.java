@@ -86,17 +86,23 @@ public class ResultActivity extends AppCompatActivity {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public boolean onLongClick(View v) {
-
+                int dialogDimension = dpToPx(300);
                 Dialog dialog = new Dialog(ResultActivity.this);
                 dialog.setContentView(R.layout.activity_dialog);
                 dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
-                dialog.getWindow().setLayout(1200, 1200);
+                dialog.getWindow().setLayout(dialogDimension, dialogDimension);
                 dialog.setCancelable(true);
                 dialog.show();
-
                 return true;
             }
         });
+    }
+
+    public int dpToPx(int dp) {
+        float density = ResultActivity.this.getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 
     private void buttonVibrate() {
